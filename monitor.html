@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Earthquake Acquisition Plantform" />
+	<meta name="author" content="DYTH @ 2016" />
+	<title>房屋抗震评估及信息采集管理系统</title>
+	<link rel="icon" type="image/png" href="images/favicon.png" />
+	<link rel="stylesheet" href="libs/xenon/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="libs/xenon/css/fonts/fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="libs/xenon/css/bootstrap.css">
+	<link rel="stylesheet" href="libs/xenon/css/xenon-core.css">
+	<link rel="stylesheet" href="libs/xenon/css/xenon-forms.css">
+	<link rel="stylesheet" href="libs/xenon/css/xenon-components.css">
+	<link rel="stylesheet" href="libs/xenon/css/xenon-skins.css">
+	<link rel="stylesheet" href="libs/scrollbar/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" href="libs/datetimepicker/css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="libs/bootstrap-notify/css/bootstrap-notify.css">
+	<link rel="stylesheet" href="css/application.css">
+	<script src="libs/xenon/js/jquery-1.11.1.min.js"></script>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body class="page-body">
+	<div class="page-container">
+		<div class="sidebar-menu toggle-others fixed collapsed">
+			<div class="sidebar-menu-inner ps-container">	
+				<header class="logo-env">
+					<!-- logo -->
+					<div class="logo">
+						<a href="index.html" class="logo-collapsed">
+							<img src="images/logo-collapsed@2x.png" width="40" title="房屋抗震评估及信息采集管理系统" alt="房屋抗震评估及信息采集管理系统"/>
+						</a>
+					</div>		
+				</header>
+
+				<ul id="main-menu" class="main-menu">
+					<li>
+						<a href="index.html" title="建筑物信息管理">
+							<i class="linecons-database"></i>
+							<span class="title">建筑物信息管理</span>
+						</a>
+					</li>
+					<li id="monitor" class="active">
+						<a href="monitor.html" title="采集员实时监控">
+							<i class="linecons-location"></i>
+							<span class="title">采集员实时监控</span>
+						</a>
+					</li>
+					<li id="usermanager">
+						<a href="userManager.html" title="用户信息管理">
+							<i class="linecons-user"></i>
+							<span class="title">用户信息管理</span>
+						</a>
+					</li>
+					<li id="settings">
+						<a href="vulnerSetting.html" title="系统设置">
+							<i class="linecons-cog"></i>
+							<span class="title">系统设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="statement.html" title="说明">
+							<i class="linecons-lightbulb"></i>
+							<span class="Helps">说明</span>
+						</a>
+					</li>
+				</ul>	
+			</div>
+		</div>
+		<div class="sidebar-submenu fixed">
+			<div class="sidebar-submenu-inner">
+				<ul class="sub-menu list-unstyled">
+					<li class="sub-menu-title">采集员实时监控</li>
+					<li class="sub-menu-item active"><a href="monitor.html"><i class="fa fa-video-camera"></i> 实时监控</a></li>
+					<li class="sub-menu-item"><a href="trajectory.html"><i class="fa fa-history"></i> 历史轨迹</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-content">
+			<nav class="navbar user-info-navbar fixed" role="navigation">
+				<!-- Left links for user info navbar -->
+				<ul class="user-info-menu right-links list-inline list-unstyled">
+					<li class="dropdown user-profile">
+						<a href="#" data-toggle="dropdown">
+							<img src="images/user.png" alt="user-image" class="img-circle img-inline userpic-32" width="28">
+							<span id="logusername">Arlind Nushi <i class="fa-angle-down"></i></span>
+						</a>
+						<ul class="dropdown-menu user-profile-menu list-unstyled">
+							<li>
+								<a href="contact.html">
+									<i class="fa-info"></i>
+									帮助
+								</a>
+							</li>
+							<li class="last">
+								<a id="logout" href="javascript:void(0);">
+									<i class="fa-lock"></i>
+									退出
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- Right links for user info navbar -->
+				<ul class="user-info-menu left-links list-inline list-unstyled">					
+					<li class="user-profile">
+						<a href="javascript:void(0);"><span id="loguser">Administrator</span></a>
+					</li>
+				</ul>
+			</nav>
+			<div class="page-title">
+				<div class="title-env">
+					<h1 class="title"><i class="fa fa-video-camera"></i> 实时监控</h1>
+					<p class="description">
+						在线采集员实时监控
+					</p>
+				</div>
+				<div class="breadcrumb-env">
+					<ol class="breadcrumb bc-1">
+						<li>
+							<a href="monitor.html"> <i class="fa-home"></i>
+								采集员实时监控
+							</a>
+						</li>
+						<li class="active"> <strong>实时监控</strong>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<div class="page-body-static">
+				<div class="content-contain">
+					<div id="map" class="map-contain show">
+						<p class="text-center"  style="padding-top: 300px;"><span class="fa fa-spin fa-spinner"></span> 数据加载中...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="sidebar-submenu fixed right-panel">
+			<div class="sidebar-submenu-inner">
+				<ul class="sub-menu list-unstyled">
+					<li class="sub-menu-title">在线用户列表<span id="userNum" class="badge badge-info pull-right">1</span></li>
+					<li class="sub-menu-item">
+						<div class="row detial-tabs">
+							<div class="col-md-12">
+								<div class="tab-content media-content">
+									<div class="tab-pane active" id="baseinfo">
+										<ul class="media-list">
+											<li class="media">
+								              <a class="pull-left" href="#">
+								                <img class="media-object" src="images/defavatar.png" style="width: 48px; height: 48px;">
+								              </a>
+								              <div class="media-body">
+								                <p>陈波<span class="label label-secondary pull-right">管理员</span></p>
+								                <p>设备：PE-CL00</p>
+								                <p>APP版本：V1.0</p>
+								                <p>上线时间：2016年12月12日 12:12:12</p>
+								              </div>
+								            </li>
+								        </ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class='notifications top-right'></div>
+	<div class="page-loading-overlay">
+		<div class="loader-2"></div>
+	</div>
+
+	<link rel="stylesheet" href="libs/xenon/js/datatables/dataTables.bootstrap.css">
+	<!-- Bottom Scripts -->
+	<script src="libs/xenon/js/bootstrap.min.js"></script>
+	<script src="libs/xenon/js/TweenMax.min.js"></script>
+	<script src="libs/xenon/js/resizeable.js"></script>
+	<script src="libs/xenon/js/joinable.js"></script>
+	<script src="libs/xenon/js/xenon-api.js"></script>
+	<script src="libs/xenon/js/xenon-toggles.js"></script>
+	<!-- Imported scripts on this page -->
+	<script src="libs/xenon/js/xenon-widgets.js"></script>
+	<script src="libs/xenon/js/devexpress-web-14.1/js/globalize.min.js"></script>
+	<script src="libs/xenon/js/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="libs/xenon/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
+	<script src="libs/xenon/js/toastr/toastr.min.js"></script>
+	<!-- JavaScripts initializations and stuff -->
+	<script src="libs/xenon/js/xenon-custom.js"></script>
+	<script src="libs/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GGvhGfDF6GyuDoE1l2MFkzVC"></script>
+  	<script src="libs/bootstrap-notify/js/bootstrap-notify.js"></script>
+	<!-- App Scripts -->
+	<script src="libs/jquery.json.min.js" type="text/javascript"></script>
+	<script src="libs/require.js" type="text/javascript"></script>
+	<script type="text/javascript" src="app/config/requireConfig.js"></script>
+  	<script type="text/javascript" src="app/config/config.js"></script>
+  	<script type="text/javascript">
+		require(["modules/monitor"], function(monitor) {
+			window.monitor = new monitor(configOptions);
+		});
+	</script>
+</body>
+</html>

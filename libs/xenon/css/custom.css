@@ -1,0 +1,160 @@
+/**
+ *
+ * Apply your custom CSS here
+ *
+*/
+
+body {	
+}
+
+a {
+}
+
+.logo a {
+	font-size: 18px;
+	color: #fff;
+}
+
+.logo a:hover,
+.logo a:focus {
+	color: #979898;
+}
+
+.logo p {
+	text-align: center;
+	font-size: 15px;
+}
+
+.bd-heatmap {
+	height: 450px;
+}
+
+.detialInfo {
+	font-size: 14px;
+}
+
+.detialInfo strong {
+	color: #2C2E2F;
+}
+
+.detialInfo .col-sm-6 {
+	margin-bottom: 8px;
+}
+
+/* THUMBNAIL
+-------------------------------------------------- */
+
+.tabgallery .thumbnail {
+	cursor: pointer;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	text-decoration: none;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	transform: translate3d(0, 0, 0);
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.tabgallery .thumbnail:before,
+.tabgallery .thumbnail:after {
+	content: "";
+	display: table
+}
+
+.tabgallery .thumbnail:after {
+	clear: both
+}
+
+.tabgallery .thumbnail:hover,
+.tabgallery .thumbnail:focus {
+	box-shadow: 0 22px 43px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0 22px 43px rgba(0, 0, 0, 0.15);
+	color: #1A4C87;
+	-webkit-transform: translateY(-4px);
+	transform: translateY(-4px);
+	-moz-transform: none;
+}
+
+.tabgallery .thumbnail .imgThumb {
+	height: 246px;
+	overflow: hidden;
+	background-size: cover;
+	-webkit-transition: 0.4s;
+	transition: 0.4s
+}
+
+.tabgallery .thumbnail .caption {
+	padding: 9px;
+}
+
+.tabgallery .thumbnail .caption .author-info {
+	margin: 0;
+	padding: 0;
+}
+
+.tabgallery .thumbnail .author-avatar {
+	padding-right: 4px;
+}
+
+.tabgallery .thumbnail .author-avatar img {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	margin-top: 0px;
+	vertical-align: -5px;
+}
+
+.tabgallery .thumbnail .author-name {
+	color: #999;
+	font-size: 12px;
+	display: inline-block;
+	max-width: 53%;
+}
+
+.tabgallery .thumbnail .comment-count,
+.tabgallery .thumbnail .view-count {
+	color: #999;
+	font-size: 12px;
+	margin: 0 0 0 8px;
+}
+
+.tabgallery .thumbnail-label {
+	font-size: 16px;
+	color: #222;
+	line-height: 26px;
+	margin: 20px 0 10px;
+	width: 100%;
+	vertical-align: middle;
+}
+
+.tabgallery .thumbnail-description {
+	color: #666;
+	font-size: 12px;
+	line-height: 1.5em;
+	height: 54px;
+	overflow: hidden;
+	word-break: break-all;
+}
+
+.tabgallery .thumbnail-time {
+	color: #999;
+	font-size: 12px;
+	line-height: 12px;
+	margin: 18px 0;
+}
+
+@media screen and (max-width:1024) {
+	.tabgallery .thumbnail .img-responsive {
+		height: 133px;
+	}
+
+}

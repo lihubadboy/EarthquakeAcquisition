@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Earthquake Acquisition Plantform" />
+	<meta name="author" content="DYTH @ 2016" />
+	<title>房屋抗震评估及信息采集管理系统</title>
+	<link rel="icon" type="image/png" href="images/favicon.png" />
+	<link rel="stylesheet" href="libs/xenon/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="libs/xenon/css/fonts/fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="libs/xenon/css/bootstrap.css">
+	<link rel="stylesheet" href="libs/xenon/css/xenon-core.css">
+	<link rel="stylesheet" href="libs/xenon/css/xenon-forms.css">
+	<link rel="stylesheet" href="libs/xenon/css/xenon-components.css">
+	<link rel="stylesheet" href="libs/xenon/css/xenon-skins.css">
+	<link rel="stylesheet" href="libs/scrollbar/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" href="libs/datetimepicker/css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="libs/bootstrap-notify/css/bootstrap-notify.css">
+	<link rel="stylesheet" href="css/application.css">
+	<script src="libs/xenon/js/jquery-1.11.1.min.js"></script>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body class="page-body">
+	<div class="page-container">
+		<div class="sidebar-menu toggle-others fixed collapsed">
+			<div class="sidebar-menu-inner ps-container">	
+				<header class="logo-env">
+					<!-- logo -->
+					<div class="logo">
+						<a href="index.html" class="logo-collapsed">
+							<img src="images/logo-collapsed@2x.png" width="40" title="房屋抗震评估及信息采集管理系统" alt="房屋抗震评估及信息采集管理系统"/>
+						</a>
+					</div>		
+				</header>
+
+				<ul id="main-menu" class="main-menu">
+					<li class="active">
+						<a href="index.html" title="建筑物信息管理">
+							<i class="linecons-database"></i>
+							<span class="title">建筑物信息管理</span>
+						</a>
+					</li>
+					<li id="monitor">
+						<a href="monitor.html" title="采集员实时监控">
+							<i class="linecons-location"></i>
+							<span class="title">采集员实时监控</span>
+						</a>
+					</li>
+					<li id="usermanager">
+						<a href="userManager.html" title="用户信息管理">
+							<i class="linecons-user"></i>
+							<span class="title">用户信息管理</span>
+						</a>
+					</li>
+					<li id="settings">
+						<a href="vulnerSetting.html" title="系统设置">
+							<i class="linecons-cog"></i>
+							<span class="title">系统设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="statement.html" title="说明">
+							<i class="linecons-lightbulb"></i>
+							<span class="Helps">说明</span>
+						</a>
+					</li>
+				</ul>	
+			</div>
+		</div>
+		<div class="sidebar-submenu fixed">
+			<div class="sidebar-submenu-inner">
+				<ul class="sub-menu list-unstyled">
+					<li class="sub-menu-title">建筑物信息管理</li>
+					<li class="sub-menu-item"><a href="index.html"><i class="fa fa-newspaper-o"></i> 概览</a></li>
+					<li class="sub-menu-item"><a href="houseList.html"><i class="fa fa-building"></i> 房屋抗震评估</a></li>
+					<li class="sub-menu-item active"><a href="buildingList.html"><i class="fa fa-cubes"></i> 建筑物信息采集</a></li>
+				</ul>
+				<ul class="sub-menu list-unstyled">
+					<li class="sub-menu-title">审核状态</li>
+					<li class="sub-menu-item data-type active" data="2" sindex="-1">全部<span id="allnum" class="badge badge-white pull-right">0</span></li>
+					<li class="sub-menu-item data-type" data="0" sindex="2">待审核<span id="num0" class="badge badge-dsh pull-right">0</span></li>
+					<li class="sub-menu-item data-type" data="1" sindex="0">已通过<span id="num1" class="badge badge-ytg pull-right">0</span></li>
+					<li class="sub-menu-item data-type" data="-1" sindex="1">未通过<span id="num-1" class="badge badge-wtg pull-right">0</span></li>
+				</ul>
+				<ul class="sub-menu list-unstyled">
+					<li class="sub-menu-title">显示模式</li>
+					<li class="sub-menu-item view-type active" data="map"><i class="fa fa-globe"></i> 地图</li>
+					<li class="sub-menu-item view-type" data="table"><i class="fa fa-table"></i> 表格</li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-content">
+			<nav class="navbar user-info-navbar fixed" role="navigation">
+				<!-- Left links for user info navbar -->
+				<ul class="user-info-menu right-links list-inline list-unstyled">
+					<li class="dropdown user-profile">
+						<a href="#" data-toggle="dropdown">
+							<img src="images/user.png" alt="user-image" class="img-circle img-inline userpic-32" width="28">
+							<span id="logusername">Arlind Nushi <i class="fa-angle-down"></i></span>
+						</a>
+						<ul class="dropdown-menu user-profile-menu list-unstyled">
+							<li>
+								<a href="contact.html">
+									<i class="fa-info"></i>
+									帮助
+								</a>
+							</li>
+							<li class="last">
+								<a id="logout" href="javascript:void(0);">
+									<i class="fa-lock"></i>
+									退出
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- Right links for user info navbar -->
+				<ul class="user-info-menu left-links list-inline list-unstyled">					
+					<li class="user-profile">
+						<a href="javascript:void(0);"><span id="loguser">Administrator</span></a>
+					</li>
+				</ul>
+			</nav>
+			<div class="page-title">
+				<div class="title-env">
+					<h1 class="title"><i class="fa fa-cubes"></i> 建筑物信息采集</h1>
+					<p class="description">
+						建筑物采集信息管理维护
+					</p>
+				</div>
+				<div class="breadcrumb-env">
+					<ol class="breadcrumb bc-1">
+						<li>
+							<a href="index.html"> <i class="fa-home"></i>
+								建筑物信息管理
+							</a>
+						</li>
+						<li class="active"> <strong>建筑物信息采集</strong>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<div class="page-body-static">
+				<div class="content-contain show2">
+					<div id="table" class="container-fluid hidden">
+						<div class="row opration-contain">
+							<form class="form-inline">
+								<div class="form-group pull-right">
+									<div class="btn-group pull-right muilty-audit">
+										<button type="button" class="btn btn-secondary">审核记录</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-caret-down"></i>
+										</button>
+										<ul class="dropdown-menu dropdown-secondary no-spacing" role="menu">
+											<li>
+												<a href="javascript:void(0);" data="1">通过</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" data="-1">不通过</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="form-group">
+									<button id="btnAddBuilding" type="button" class="btn btn-white"><i class="fa fa-plus-circle"></i> 新建记录</button>
+								</div>
+								<div class="form-group">
+									<button id="btnDeleteSelected" type="button" class="btn btn-white"><i class="fa fa-recycle"></i> 删除记录</button>
+								</div>
+								<div class="form-group">
+									<button id="btn-export" type="button" class="btn btn-white"><i class="fa fa-cloud-download"> 导出记录</i></button>
+								</div>
+							</form>
+						</div>
+						<div class="row table-contain">
+							<p class="text-center"  style="padding-top: 300px;"><span class="fa fa-spin fa-spinner"></span> 数据加载中...</p>
+						</div>
+					</div>
+					<div id="map" class="map-contain show">
+						<p class="text-center"  style="padding-top: 300px;"><span class="fa fa-spin fa-spinner"></span> 数据加载中...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="sidebar-submenu fixed right-panel hiden">
+			<div class="sidebar-submenu-inner">
+				<ul class="sub-menu list-unstyled">
+					<li class="sub-menu-title">详细信息<i class="fa fa-close pull-right"></i></li>
+					<li class="sub-menu-item">
+						<div class="row detial-tabs">
+							<div class="col-md-12">
+								<ul class="nav nav-tabs nav-tabs-justified" role="tablist">
+									<li class="active"><a href="#baseinfo" data-toggle="tab">基本信息</a></li>
+									<li><a href="#otherinfo" data-toggle="tab">其他信息</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="sub-menu-item detialmap"><div id="detialMap"></div></li>
+					<li class="sub-menu-title">
+						<span id="buildName1">建筑物信息</span>
+						<div class="btn-group pull-right single-audit">
+							<button type="button" class="btn btn-secondary btn-xs">审核</button>
+							<button type="button" class="btn btn-secondary btn-xs dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-caret-down"></i>
+							</button>
+							<ul class="dropdown-menu dropdown-secondary no-spacing" role="menu">
+								<li>
+									<a href="javascript:void(0);" data="1">通过</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);" data="-1">不通过</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="sub-menu-item">
+						<div class="row detial-tabs">
+							<div class="col-md-12">
+								<div class="tab-content">
+									<div class="tab-pane active" id="baseinfo">
+										<dl class="dl-horizontal">
+											<dt>编号</dt>
+											<dd id="buildID1"></dd>
+											<dt>采集员</dt>
+											<dd id="userName1" class="blue"></dd>
+											<dt>采集时间</dt>
+											<dd id="createTime1"></dd>
+											<dt>坐标</dt>
+											<dd id="coords1"></dd>
+											<dt>审核状态</dt>
+											<dd id="approveStatus1"></dd>
+											<dt>产权人</dt>
+											<dd id="buildOwner1"></dd>
+											<dt>联系电话</dt>
+											<dd id="telephone1"></dd>
+											<dt>主要用途</dt>
+											<dd id="buildUsage1"></dd>
+											<dt>结构类型</dt>
+											<dd id="structType1"></dd>
+											<dt>房屋现状</dt>
+											<dd id="statusQuo1"></dd>
+											<dt>地上面积</dt>
+											<dd id="areaOver1"></dd>
+											<dt>地下面积</dt>
+											<dd id="areaUnder1"></dd>
+											<dt>地上层数</dt>
+											<dd id="floorOver1"></dd>
+											<dt>地下层数</dt>
+											<dd id="floorUnder1"></dd>
+											<dt>长*宽*高</dt>
+											<dd id="size1"></dd>
+											<dt>设计单位</dt>
+											<dd id="designComp1"></dd>
+											<dt>建造年代</dt>
+											<dd id="buildTime1"></dd>
+											<dt>平立面规则</dt>
+											<dd id="surface1"></dd>
+											<dt>结构抗震措施</dt>
+											<dd id="structSeismic1"></dd>
+											<dt>详细地址</dt>
+											<dd id="address1"></dd>
+										</dl>
+									</div>
+									<div class="tab-pane" id="otherinfo">
+										<dl class="dl-horizontal">
+											<dt>竣工时间</dt>
+											<dd id="completionTime1"></dd>
+											<dt>滑坡危险</dt>
+											<dd id="landslide1"></dd>
+											<dt>勘察单位</dt>
+											<dd id="investigationComp1"></dd>
+											<dt>场地类别</dt>
+											<dd id="siteType1"></dd>
+											<dt>施工单位</dt>
+											<dd id="constructComp1"></dd>
+											<dt>竣工验收备案</dt>
+											<dd id="completionAcc1"></dd>
+											<dt>是否加固改造</dt>
+											<dd id="reinforce1"></dd>
+											<dt>加固改造时间</dt>
+											<dd id="reinforceTime1"></dd>
+											<dt>楼板型式</dt>
+											<dd id="floorType1"></dd>
+											<dt>基础型式</dt>
+											<dd id="baseType1"></dd>
+											<dt>抗震设防烈度</dt>
+											<dd id="fortifyLevel1"></dd>
+											<dt>抗震规范版本</dt>
+											<dd id="standardVersion1"></dd>
+											<dt>建筑物照片</dt>
+										</dl>
+										<div id="thumb-contain" class="col-md-12 clear-padding-left clear-padding-right">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="sub-menu-title">
+						<form class="form-inline text-center">
+							<div class="form-group">
+								<button id="btnModifyCurrent" type="button" class="btn btn-white btn-sm">编辑记录</button>
+							</div>
+							<div class="form-group">
+								<button id="btnDeleteCurrent" type="button" class="btn btn-white btn-sm">删除记录</button>
+							</div>
+							<div class="form-group">
+								<button id="btnUploadImgs" type="button" class="btn btn-white btn-sm">上传附件</button>
+							</div>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="exportContainer" style="display: none;"></div>
+	<div id="dlgExport" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="caption" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	        <h4 class="modal-title" id="gridSystemModalLabel">添加信息</h4>
+	      </div>
+	      <div class="modal-body">
+	        <div class="tab-content">
+	          <div class="tab-pane active" id="tab1">
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group required">
+	                  <label for="field-1" class="control-label">编号</label>
+	                  <input type="text" class="form-control" id="buildID" placeholder="必填"></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group required">
+	                  <label for="field-1" class="control-label">建筑物名称</label>
+	                  <input type="text" class="form-control" id="name" placeholder="必填"></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">产权人</label>
+	                  <input type="text" class="form-control" id="buildOwner"></div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">联系电话</label>
+	                  <input type="text" class="form-control" id="telephone"></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">建筑物用途</label>
+	                  <select id="buildUsage" class="form-control">
+	                    <option>学校</option>
+	                    <option>医院</option>
+	                    <option>公共建筑</option>
+	                    <option>基础设施</option>
+	                    <option>居住建筑</option>
+	                    <option>其他</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">设防烈度</label>
+	                  <select id="fortifyLevel" class="form-control">
+	                    <option>不设防</option>
+	                    <option>6度</option>
+	                    <option>7度</option>
+	                    <option>8度</option>
+	                  </select>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group required">
+	                  <label for="field-1" class="control-label">经度</label>
+	                  <input type="text" class="form-control" id="longitude" placeholder="必填"></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group required">
+	                  <label for="field-1" class="control-label">纬度</label>
+	                  <input type="text" class="form-control" id="latitude" placeholder="必填"></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">设计单位</label>
+	                  <br/>
+	                  <select id="designComp" class="form-control">
+	                    <option>有</option>
+	                    <option>无</option>
+	                  </select>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">建造年代</label>
+	                  <select id="buildTime" class="form-control">
+	                    <option>60年代前</option>
+	                    <option>70年代</option>
+	                    <option>80年代</option>
+	                    <option>90年代</option>
+	                    <option>2000年代</option>
+	                    <option>2010年代</option>
+	                    <option>2010年代后</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">房屋现状</label>
+	                  <select id="statusQuo" class="form-control">
+	                    <option>完好</option>
+	                    <option>开裂</option>
+	                    <option>腐蚀</option>
+	                    <option>歪闪</option>
+	                    <option>变形</option>
+	                    <option>不均匀沉降</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">平立面规则</label>
+	                  <select id="surface" class="form-control">
+	                    <option>是</option>
+	                    <option>否</option>
+	                  </select>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">结构抗震措施</label>
+	                  <select id="structSeismic" class="form-control">
+	                    <option>有</option>
+	                    <option>无</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">地上面积</label>
+	                  <input type="text" class="form-control" id="areaOver" placeholder="平方米"></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">地下面积</label>
+	                  <input type="text" class="form-control" id="areaUnder" placeholder="平方米"></div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">地上层数</label>
+	                  <input type="text" class="form-control" id="floorOver" placeholder="层"></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">地下层数</label>
+	                  <input type="text" class="form-control" id="floorUnder" placeholder="层"></div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-2" class="control-label">长</label>
+	                  <input type="text" class="form-control" id="length" placeholder="米"></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-3" class="control-label">宽</label>
+	                  <input type="text" class="form-control" id="width" placeholder="米"></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-4" class="control-label">高</label>
+	                  <input type="text" class="form-control" id="height" placeholder="米"></div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-8">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">结构类型</label>
+	                  <select id="structType" class="form-control">
+	                    <option>钢筋混凝土结构</option>
+	                    <option>砖混结构</option>
+	                    <option>混凝土小砌块结构</option>
+	                    <option>砖木结构</option>
+	                    <option>土木结构</option>
+	                    <option>钢结构</option>
+	                    <option>木结构</option>
+	                    <option>石结构</option>
+	                    <option>其它</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group subtype">
+	                  <label for="field-1" class="control-label">.</label>
+	                  <select id="structSubType" class="form-control">
+	                    <option>框架</option>
+	                    <option>框剪</option>
+	                    <option>剪力墙</option>
+	                    <option>框筒</option>
+	                    <option>筒中筒</option>
+	                    <option>其他</option>
+	                  </select>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-12">
+	                <div class="form-group required">
+	                  <label for="field-5" class="control-label">详细地址</label>
+	                  <input type="text" class="form-control" id="address" placeholder="必填"></div>
+	              </div>
+	            </div>
+	          </div>
+	          <div class="tab-pane" id="tab2">
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">竣工时间</label>
+	                  <input id="completionTime" class="form-control" type="text" readonly> 
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">改造时间</label>
+	                  <input type="text" class="form-control" id="reinforceTime" readonly></div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">滑坡危险</label>
+	                  <br/>
+	                  <select id="landslide" class="form-control">
+	                    <option>有</option>
+	                    <option>无</option>
+	                  </select>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">勘查单位</label>
+	                  <br/>
+	                  <select id="investigationComp" class="form-control">
+	                    <option>有</option>
+	                    <option>无</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">场地类型</label>
+	                  <br/>
+	                  <select id="siteType" class="form-control">
+	                    <option>I0</option>
+	                    <option>I1</option>
+	                    <option>Ⅱ</option>
+	                    <option>Ⅲ</option>
+	                    <option>Ⅳ</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">施工单位</label>
+	                  <br/>
+	                  <select id="constructComp" class="form-control">
+	                    <option>有</option>
+	                    <option>无</option>
+	                  </select>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">竣工验收备案</label>
+	                  <br/>
+	                  <select id="completionAcc" class="form-control">
+	                    <option>是</option>
+	                    <option>否</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">是否加固</label>
+	                  <br/>
+	                  <select id="reinforce" class="form-control">
+	                    <option>是</option>
+	                    <option>否</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">楼板类型</label>
+	                  <br/>
+	                  <select id="floorType" class="form-control">
+	                    <option>现浇板</option>
+	                    <option>预制板</option>
+	                    <option>其他</option>
+	                  </select>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">基础形式</label>
+	                  <br/>
+	                  <select id="baseType" class="form-control">
+	                    <option>独立基础</option>
+	                    <option>条形基础</option>
+	                    <option>桩基</option>
+	                    <option>筏基</option>
+	                    <option>桩筏联合基础</option>
+	                    <option>其他</option>
+	                  </select>
+	                </div>
+	              </div>
+	              <div class="col-md-4">
+	                <div class="form-group">
+	                  <label for="field-1" class="control-label">抗震规范版本</label>
+	                  <br/>
+	                  <select id="standardVersion" class="form-control">
+	                    <option>74规范</option>
+	                    <option>78规范</option>
+	                    <option>89规范</option>
+	                    <option>01规范</option>
+	                    <option>08规范</option>
+	                    <option>10规范</option>
+	                  </select>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <div class="btn-group dlg-switch pull-left" role="group">
+	          <button id="baseinfo" type="button" class="btn btn-info">基本信息</button>
+	          <button id="otherinfo" type="button" class="btn btn-white">其他信息</button>
+	        </div>
+	        <button type="button" class="btn btn-default btn-white" data-dismiss="modal">取消</button>
+	        <button id="btn-add" type="button" class="btn btn-secondary">添加</button>
+	        <button id="btn-modify" type="button" class="btn btn-secondary" style="display: none;">更新</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div id="dlgDelete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="caption" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	        <h4 class="modal-title" id="gridSystemModalLabel">删除</h4>
+	      </div>
+	      <div class="modal-body">
+	        <div class="container-fluid">
+	          <p id="deleteContent"></p>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+	        <button id="btnDelete" type="button" class="btn btn-secondary">确定</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div id="dlgThumb" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="caption" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <div class="container-fluid">
+	          <div id="carousel-example-generic" class="carousel slide" data-interval="false"></div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div id="dlgUpload" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="caption" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	        <h4 class="modal-title" id="gridSystemModalLabel">上传附件</h4>
+	      </div>
+	      <div class="modal-body">
+	        <div class="container-fluid">
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+	        <button id="btnUpload" type="button" class="btn btn-secondary">确定</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class='notifications top-right'></div>
+	<div class="page-loading-overlay">
+		<div class="loader-2"></div>
+	</div>
+
+	<link rel="stylesheet" href="libs/xenon/js/datatables/dataTables.bootstrap.css">
+	<!-- Bottom Scripts -->
+	<script src="libs/xenon/js/bootstrap.min.js"></script>
+	<script src="libs/xenon/js/TweenMax.min.js"></script>
+	<script src="libs/xenon/js/resizeable.js"></script>
+	<script src="libs/xenon/js/joinable.js"></script>
+	<script src="libs/xenon/js/xenon-api.js"></script>
+	<script src="libs/xenon/js/xenon-toggles.js"></script>
+	<!-- Imported scripts on this page -->
+	<script src="libs/xenon/js/xenon-widgets.js"></script>
+	<script src="libs/xenon/js/devexpress-web-14.1/js/globalize.min.js"></script>
+	<script src="libs/xenon/js/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="libs/xenon/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
+	<script src="libs/xenon/js/toastr/toastr.min.js"></script>
+	<!-- JavaScripts initializations and stuff -->
+	<script src="libs/xenon/js/xenon-custom.js"></script>
+	<script src="libs/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="libs/echarts.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GGvhGfDF6GyuDoE1l2MFkzVC"></script>
+	<script src="libs/bmap.min.js"></script>
+	<script src="libs/datetimepicker/js/bootstrap-datetimepicker.js" type="text/javascript"  charset="UTF-8"></script>
+	<script src="libs/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="libs/swfupload/swfupload.js"></script>
+	<script src="libs/tableExport/Blob.js" type="text/javascript"></script>
+  	<script src="libs/tableExport/FileSaver.js" type="text/javascript"></script>
+  	<script src="libs/tableExport/tableExport.js" type="text/javascript"></script>
+  	<script src="libs/bootstrap-notify/js/bootstrap-notify.js"></script>
+	<!-- App Scripts -->
+	<script src="libs/jquery.json.min.js" type="text/javascript"></script>
+	<script src="libs/require.js" type="text/javascript"></script>
+	<script type="text/javascript" src="app/config/requireConfig.js"></script>
+  	<script type="text/javascript" src="app/config/config.js"></script>
+  	<script type="text/javascript">
+		require(["modules/buildingList"], function(buildingList) {
+			window.buildingList = new buildingList(configOptions);
+		});
+	</script>
+</body>
+</html>
